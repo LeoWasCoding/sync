@@ -304,7 +304,7 @@
 
         <h3>Flow & Control</h3>
         <a href="#execution-flow"><span class="dot"></span>Execution flow</a>
-        <a href="#custom-ui"><span class="dot"></span>Custom UI</a>
+        <a href="#custom-ui"><span class="dot"></span>Custom UI (Beta)</a>
         <a href="#event-cancellation"><span class="dot"></span>Event cancellation</a>
         <a href="#loops"><span class="dot"></span>Loops</a>
         <a href="#regions"><span class="dot"></span>Protection regions</a>
@@ -827,7 +827,7 @@ Cancel if "{vip} != 1" in region "vipzone"</code></pre>
       <!-- Custom UI -->
       <article class="section" id="custom-ui" data-title="custom ui">
         <div class="section-header">
-          <h2>Custom UI</h2>
+          <h2>Custom UI (Beta)</h2>
           <div class="section-tools"><span class="kicker">ActionForm & ModalForm</span></div>
         </div>
         <div class="section-body">
@@ -1235,7 +1235,7 @@ Var condition (require): "{rank} == admin"</code></pre>
                 <pre><code>Loop: per-player, interval 20
             Folder: Stats
             Action: add local 'playtime' by 1
-            Message: "Playtime: {playtime} seconds"</code></pre>
+            Command (player): "title @s actionbar Playtime: {playtime} seconds"</code></pre>
               </div>
             
               <div class="example">

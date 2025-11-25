@@ -1144,52 +1144,137 @@ Var condition (require): "{rank} == admin"</code></pre>
                 <h5>1) Auto-Farm Reward</h5>
                 <p class="desc">Track wheat break count and provide feedback.</p>
                 <pre><code>Hook: Player Break Block (after)
-Input: wheat
-Action: add local 'wheatbroken' by 1
-Message: "Wheat broken: {wheatbroken}"</code></pre>
+            Input: wheat
+            Action: add local 'wheatbroken' by 1
+            Message: "Wheat broken: {wheatbroken}"</code></pre>
               </div>
+            
               <div class="example">
                 <h5>2) VIP Only Zone</h5>
                 <p class="desc">Cancel placement for non-VIPs in region.</p>
                 <pre><code>Hook: Player Place Block (before)
-Condition: region vipzone
-Var condition (cancel): "{vip} != 1"</code></pre>
+            Condition: region vipzone
+            Var condition (cancel): "{vip} != 1"</code></pre>
               </div>
+            
               <div class="example">
                 <h5>3) Kill Counter + Title</h5>
                 <p class="desc">Track per-player zombie kills.</p>
                 <pre><code>Hook: Entity Die (after)
-Input: zombie
-Condition: KilledByPlayer
-Action: add local 'zombiekills' by 1
-Command: title {player} actionbar "Zombies killed: {zombiekills}"</code></pre>
+            Input: zombie
+            Condition: KilledByPlayer
+            Action: add local 'zombiekills' by 1
+            Command: title {player} actionbar "Zombies killed: {zombiekills}"</code></pre>
               </div>
+            
               <div class="example">
                 <h5>4) Daily Login Reward</h5>
                 <p class="desc">Global loop giving daily rewards.</p>
                 <pre><code>Loop: global, interval 24000
-Command: give @a diamond 1
-Broadcast: "Daily reward claimed!"</code></pre>
+            Command: give @a diamond 1
+            Broadcast: "Daily reward claimed!"</code></pre>
               </div>
+            
               <div class="example">
                 <h5>5) Custom Shop</h5>
                 <p class="desc">Interactive purchase using emeralds.</p>
                 <pre><code>Hook: Item Use (after)
-Input: emerald
-Custom UI:
- - Button: "Buy Sword (10 emeralds)"
-   Actions:
-     - command (player): give @s diamond_sword
-     - variable (local): set 'emeralds' to {emeralds} - 10</code></pre>
+            Input: emerald
+            Custom UI:
+             - Button: "Buy Sword (10 emeralds)"
+               Actions:
+                 - command (player): give @s diamond_sword
+                 - variable (local): set 'emeralds' to {emeralds} - 10</code></pre>
               </div>
+            
               <div class="example">
                 <h5>6) Anti-Grief Logging</h5>
                 <p class="desc">Log block breaks with coordinates.</p>
                 <pre><code>Hook: Player Break Block (after)
-Message: "§c{player} broke {block_name} at {x} {y} {z}"</code></pre>
+            Message: "§c{player} broke {block_name} at {x} {y} {z}"</code></pre>
+              </div>
+            
+              <div class="example">
+                <h5>7) Player Level Tracker</h5>
+                <p class="desc">Track XP level ups and reward items.</p>
+                <pre><code>Hook: On Chat (after)
+            Input: "level up"
+            Action: add local 'levels' by 1
+            Command: give {player} golden_apple 1
+            Message: "Congrats {player}, you reached level {levels}!"</code></pre>
+              </div>
+            
+              <div class="example">
+                <h5>8) Region-Based Mining Restriction</h5>
+                <p class="desc">Prevent diamond mining in protected zone.</p>
+                <pre><code>Hook: Player Break Block (before)
+            Input: diamond_ore
+            Condition: region minezone
+            Var condition (cancel): "{rank} != admin"</code></pre>
+              </div>
+            
+              <div class="example">
+                <h5>9) Boss Fight Announcer</h5>
+                <p class="desc">Broadcast when a boss mob dies.</p>
+                <pre><code>Hook: Entity Die (after)
+            Input: wither
+            Broadcast: "§cThe Wither has been defeated by {player}!"</code></pre>
+              </div>
+            
+              <div class="example">
+                <h5>10) Chat Keyword Trigger</h5>
+                <p class="desc">Run commands when players type keywords.</p>
+                <pre><code>Hook: On Chat (after)
+            Input: "help"
+            Command: tell {player} "Use /synchelp for guidance."</code></pre>
+              </div>
+            
+              <div class="example">
+                <h5>11) Playtime Counter</h5>
+                <p class="desc">Track per-player playtime with loops.</p>
+                <pre><code>Loop: per-player, interval 20
+            Folder: Stats
+            Action: add local 'playtime' by 1
+            Message: "Playtime: {playtime} seconds"</code></pre>
+              </div>
+            
+              <div class="example">
+                <h5>12) Hunger-Based Reward</h5>
+                <p class="desc">Give food when hunger drops below threshold.</p>
+                <pre><code>Hook: Item Use (after)
+            Condition: "{player hunger} < 5"
+            Command: give {player} bread 1
+            Message: "You were hungry, here's some bread!"</code></pre>
+              </div>
+            
+              <div class="example">
+                <h5>13) PvP Kill Streak</h5>
+                <p class="desc">Reward players after multiple kills.</p>
+                <pre><code>Hook: Entity Die (after)
+            Condition: KilledByPlayer
+            Action: add local 'killstreak' by 1
+            Var condition (require): "{killstreak} >= 5"
+            Command: give {player} diamond_sword 1
+            Message: "Kill streak achieved! Reward granted."</code></pre>
+              </div>
+            
+              <div class="example">
+                <h5>14) Region Entry Message</h5>
+                <p class="desc">Notify players when entering a region.</p>
+                <pre><code>Hook: Player Place Block (after)
+            Condition: region spawn
+            Message: "Welcome to the spawn region!"</code></pre>
+              </div>
+            
+              <div class="example">
+                <h5>15) Seasonal Event Loop</h5>
+                <p class="desc">Give gifts every in-game day.</p>
+                <pre><code>Loop: global, interval 24000
+            Command: give @a cookie 1
+            Broadcast: "Daily cookie gift delivered!"</code></pre>
               </div>
             </div>
-          </details>
+            </details>
 
           <details class="collapse">
             <summary>Troubleshooting patterns</summary>

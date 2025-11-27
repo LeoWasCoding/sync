@@ -26,9 +26,6 @@
       --shadow:0 10px 30px rgba(0,0,0,0.4);
       --radius:14px;
       --radius-sm:10px;
-      --transition-fast: 0.2s ease;
-      --transition-medium: 0.3s ease;
-      --transition-slow: 0.5s ease;
     }
     *{box-sizing:border-box}
     html,body{height:100%}
@@ -42,13 +39,12 @@
         linear-gradient(180deg, #0b0b0b, #121212);
       overflow-y:auto;
       animation: fadeIn 1.5s ease-out forwards;
-      scroll-behavior: smooth;
     }
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
-    a{color:var(--link);text-decoration:none; transition: color var(--transition-medium);}
+    a{color:var(--link);text-decoration:none; transition: color 0.3s ease;}
     a:hover{color:var(--link-hover)}
     .layout{
       display:grid;
@@ -56,8 +52,6 @@
       min-height:100vh;
       opacity: 0;
       animation: fadeIn 1s ease-out 0.2s forwards;
-      max-width: 1920px;
-      margin: 0 auto;
     }
     .sidebar{
       position:sticky; top:0; align-self:start;
@@ -65,7 +59,7 @@
       background:linear-gradient(180deg, #1a1a1a 0%, #0e0e0e 100%);
       border-right:1px solid var(--border);
       padding:20px 18px;
-      transition: background var(--transition-slow), width var(--transition-medium);
+      transition: background 0.5s ease;
     }
     .sidebar:hover {
       background:linear-gradient(180deg, #1f1f1f 0%, #121212 100%);
@@ -85,7 +79,7 @@
       border-radius: 10px;
       object-fit: cover;
       box-shadow: var(--shadow);
-      transition: transform var(--transition-slow), box-shadow var(--transition-slow);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
     }
     .brand-logo-img:hover {
       transform: rotate(15deg) scale(1.1);
@@ -116,17 +110,16 @@
       border-radius:12px; border:1px solid var(--border);
       background:var(--bg-soft); color:var(--text);
       outline:none; box-shadow:inset 0 0 0 1px #0003;
-      transition: border-color var(--transition-medium), box-shadow var(--transition-medium), width var(--transition-medium);
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
     }
     .search input:focus {
       border-color: var(--accent);
       box-shadow: 0 0 0 3px rgba(255,204,0,0.2);
-      width: calc(100% + 10px);
     }
     .search .icon{
       position:absolute; left:12px; top:50%; transform:translateY(-50%); color:var(--muted);
       font-size:18px;
-      transition: color var(--transition-medium);
+      transition: color 0.3s ease;
     }
     .search input:focus + .icon {
       color: var(--accent);
@@ -143,30 +136,28 @@
       display:flex; align-items:center; gap:10px;
       padding:10px 12px; border-radius:10px; color:var(--text);
       border:1px solid transparent;
-      transition: background var(--transition-medium), border-color var(--transition-medium), transform var(--transition-medium);
+      transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
       opacity: 0;
       animation: slideInLeft 0.8s ease-out forwards;
-      min-height:44px;
     }
     .nav a:nth-child(1) { animation-delay: 0.7s; }
     .nav a:nth-child(2) { animation-delay: 0.75s; }
     .nav a:nth-child(3) { animation-delay: 0.8s; }
-    .nav a:hover{background:var(--bg-soft); border-color:var(--border); transform: translateX(5px) scale(1.02);}
+    /* Add more for additional items as needed */
+    .nav a:hover{background:var(--bg-soft); border-color:var(--border); transform: translateX(5px);}
     .nav .dot{
       width:8px; height:8px; border-radius:50%;
       background:linear-gradient(180deg, #ffcc00, #ffb700);
       box-shadow:0 0 0 2px #0006;
-      transition: box-shadow var(--transition-medium), transform var(--transition-fast);
+      transition: box-shadow 0.3s ease;
     }
     .nav a:hover .dot {
       box-shadow: 0 0 0 3px rgba(255,204,0,0.3);
-      transform: scale(1.2);
     }
     .content{
       padding:30px;
       opacity: 0;
       animation: fadeIn 1s ease-out 0.3s forwards;
-      transition: padding var(--transition-medium);
     }
     .hero{
       background:
@@ -177,43 +168,33 @@
       border-radius:var(--radius);
       box-shadow:var(--shadow);
       padding:28px;
-      transition: box-shadow var(--transition-slow), transform var(--transition-slow), padding var(--transition-medium);
+      transition: box-shadow 0.5s ease, transform 0.5s ease;
       opacity: 0;
       animation: pulseGlow 2s ease-in-out infinite alternate, fadeIn 1s ease-out 0.5s forwards;
     }
     @keyframes pulseGlow {
-      from { box-shadow: var(--shadow); transform: scale(1); }
-      to { box-shadow: 0 15px 45px rgba(255,204,0,0.1); transform: scale(1.01); }
+      from { box-shadow: var(--shadow); }
+      to { box-shadow: 0 15px 45px rgba(255,204,0,0.1); }
     }
     .hero h2{margin:0 0 10px; font-size:28px}
     .hero p{color:var(--muted); margin:0}
     .badge{
       display:inline-block; padding:6px 10px; border-radius:999px; font-size:12px; margin:4px 8px 0 0;
       border:1px solid var(--border); color:#ffe066; background:linear-gradient(180deg, #1a1a1a, #101010);
-      transition: transform var(--transition-medium), background var(--transition-medium);
+      transition: transform 0.3s ease, background 0.3s ease;
     }
     .badge:hover {
-      transform: scale(1.1) rotate(5deg);
+      transform: scale(1.05);
       background:linear-gradient(180deg, #202020, #151515);
     }
     .grid{
       display:grid; gap:18px; margin-top:22px;
-      grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));
-    }
-    @media (max-width: 1200px){
-      :root { --sidebar-width: 250px; }
-      .content { padding: 20px; }
+      grid-template-columns:repeat(2, minmax(0, 1fr));
     }
     @media (max-width: 980px){
       .layout{grid-template-columns:1fr}
-      .sidebar{position:relative; height:auto; width: 100%; display:none; position:fixed; top:0; left:0; width:80%; max-width:300px; height:100vh; z-index:99; background:linear-gradient(180deg, #1a1a1a 0%, #0e0e0e 100%); border-right:1px solid var(--border); overflow:auto; } /* Full width stretch on mobile */
+      .sidebar{position:relative; height:auto}
       .grid{grid-template-columns:1fr}
-      .menu-toggle { display:block; }
-      .content { padding-left:0; }
-    }
-    @media (max-width: 600px){
-      .content { padding: 15px; }
-      .hero { padding: 20px; }
     }
     .card{
       background:var(--bg-soft);
@@ -221,18 +202,19 @@
       border-radius:var(--radius);
       padding:18px;
       box-shadow:var(--shadow);
-      transition: transform var(--transition-medium), box-shadow var(--transition-medium);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
       opacity: 0;
       animation: fadeInUp 1s ease-out forwards;
     }
     @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(20px) scale(0.95); }
-      to { opacity: 1; transform: translateY(0) scale(1); }
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
     .card:nth-child(1) { animation-delay: 0.6s; }
     .card:nth-child(2) { animation-delay: 0.7s; }
+    /* Add more for additional cards */
     .card:hover {
-      transform: translateY(-8px) scale(1.03);
+      transform: translateY(-8px);
       box-shadow: 0 20px 50px rgba(0,0,0,0.5);
     }
     .card h3{margin:0 0 8px}
@@ -243,20 +225,19 @@
       border-radius:var(--radius);
       box-shadow:var(--shadow);
       overflow:hidden;
-      transition: box-shadow var(--transition-slow), transform var(--transition-medium);
+      transition: box-shadow 0.4s ease;
       opacity: 0;
       animation: fadeIn 1s ease-out 0.8s forwards;
     }
     .section:hover {
       box-shadow: 0 15px 40px rgba(0,0,0,0.5);
-      transform: scale(1.01);
     }
     .section-header{
       padding:18px 20px;
       background:var(--bg-softer);
       border-bottom:1px solid var(--border);
       display:flex; align-items:center; justify-content:space-between; gap:12px;
-      transition: background var(--transition-medium);
+      transition: background 0.3s ease;
     }
     .section-header:hover {
       background: var(--bg-soft);
@@ -271,24 +252,23 @@
     .section-tools{display:flex; gap:10px}
     .kicker{font-size:12px;color:var(--muted)}
     .section-body{padding:18px 20px}
-    .cols{display:grid; gap:18px; grid-template-columns:repeat(auto-fit, minmax(250px, 1fr))}
+    .cols{display:grid; gap:18px; grid-template-columns:repeat(2, minmax(0, 1fr))}
     @media (max-width:980px){.cols{grid-template-columns:1fr}}
     .sub{
       border:1px dashed var(--border);
       border-radius:var(--radius-sm);
       padding:14px;
       background:linear-gradient(180deg, #1a1a1a, #121212);
-      transition: background var(--transition-medium), border-color var(--transition-medium), transform var(--transition-fast);
+      transition: background 0.3s ease, border-color 0.3s ease;
     }
     .sub:hover {
       background:linear-gradient(180deg, #202020, #171717);
       border-color: var(--accent-3);
-      transform: scale(1.02);
     }
     .sub h4{margin:0 0 6px; font-size:16px}
     .list{margin:10px 0 0; padding-left:18px}
-    .list li{margin:6px 0; transition: transform var(--transition-fast);}
-    .list li:hover { transform: translateX(5px) scale(1.01); }
+    .list li{margin:6px 0; transition: transform 0.2s ease;}
+    .list li:hover { transform: translateX(5px); }
     .tip{
       border-left:4px solid var(--accent);
       background:linear-gradient(180deg, #101010, #0e0e0e);
@@ -296,10 +276,6 @@
       color:#ffe066;
       opacity: 0;
       animation: fadeInLeft 1s ease-out forwards;
-      transition: transform var(--transition-medium);
-    }
-    .tip:hover {
-      transform: translateX(10px);
     }
     @keyframes fadeInLeft {
       from { opacity: 0; transform: translateX(-20px); }
@@ -324,23 +300,22 @@
       border:1px solid #222;
       overflow:auto;
       box-shadow: inset 0 0 0 1px rgba(255,255,255,0.05);
-      transition: box-shadow var(--transition-medium), transform var(--transition-medium);
+      transition: box-shadow 0.3s ease;
     }
     pre:hover {
       box-shadow: inset 0 0 0 1px rgba(255,255,255,0.1), 0 0 10px rgba(255,204,0,0.2);
-      transform: scale(1.01);
     }
-    code{color:#ffe066; transition: color var(--transition-medium);}
+    code{color:#ffe066; transition: color 0.3s ease;}
     code:hover { color: #ffd166; }
     .example{
       border:1px solid var(--border);
       border-radius:12px; padding:14px;
       background:linear-gradient(180deg, #1a1a1a, #121212);
       margin:14px 0;
-      transition: transform var(--transition-medium);
+      transition: transform 0.3s ease;
     }
     .example:hover {
-      transform: scale(1.03);
+      transform: scale(1.02);
     }
     .example h5{margin:0 0 8px; font-size:14px; color:#ffcc00}
     .example .desc{color:var(--muted); margin-bottom:8px}
@@ -348,7 +323,7 @@
       border:1px solid var(--border);
       border-radius:12px; overflow:hidden; margin:12px 0;
       background:linear-gradient(180deg, #0f0f0f, #1a1a1a);
-      transition: box-shadow var(--transition-medium), max-height var(--transition-slow);
+      transition: box-shadow 0.3s ease;
     }
     .collapse:hover {
       box-shadow: 0 5px 20px rgba(0,0,0,0.3);
@@ -356,7 +331,7 @@
     .collapse summary{
       list-style:none; cursor:pointer; padding:12px 12px;
       font-weight:600; color:#ffd166;
-      transition: background var(--transition-medium), color var(--transition-medium);
+      transition: background 0.3s ease, color 0.3s ease;
     }
     .collapse summary:hover {
       background: var(--bg-soft);
@@ -368,8 +343,8 @@
       animation: expand 0.5s ease-out;
     }
     @keyframes expand {
-      from { opacity: 0; max-height: 0; transform: scaleY(0.9); }
-      to { opacity: 1; max-height: 500px; transform: scaleY(1); }
+      from { opacity: 0; max-height: 0; }
+      to { opacity: 1; max-height: 500px; } /* Adjust max-height as needed */
     }
     .footer{
       margin-top:36px; padding:18px; border-top:1px solid var(--border);
@@ -384,20 +359,19 @@
     .credits .credit-badge{
       padding:6px 10px; border-radius:999px; border:1px solid var(--border);
       background:linear-gradient(180deg, #1a1a1a, #0e0e0e); color:#ffd166; font-size:12px;
-      transition: transform var(--transition-slow);
+      transition: transform 0.3s ease;
     }
     .credits .credit-badge:hover {
-      transform: rotate(360deg) scale(1.1);
+      transform: rotate(360deg);
     }
     .mc-line{
       display:inline-block; padding:8px 10px; border:1px solid var(--border);
       border-radius:10px; background:linear-gradient(180deg, #0f131a, #10131b);
       font-weight:700; letter-spacing:0.3px;
-      transition: background var(--transition-medium), transform var(--transition-fast);
+      transition: background 0.3s ease;
     }
     .mc-line:hover {
       background:linear-gradient(180deg, #121620, #131621);
-      transform: scale(1.05);
     }
     .mc-b{color:#66c0ff}
     .mc-e{color:#ffd166}
@@ -415,9 +389,9 @@
       animation: dividerGlow 3s ease infinite;
     }
     @keyframes dividerGlow {
-      0% { background: linear-gradient(90deg, transparent, #444, transparent); transform: scaleX(0.9); }
-      50% { background: linear-gradient(90deg, transparent, #666, transparent); transform: scaleX(1.1); }
-      100% { background: linear-gradient(90deg, transparent, #444, transparent); transform: scaleX(0.9); }
+      0% { background: linear-gradient(90deg, transparent, #444, transparent); }
+      50% { background: linear-gradient(90deg, transparent, #666, transparent); }
+      100% { background: linear-gradient(90deg, transparent, #444, transparent); }
     }
     #updated {
       color: #ffe066;
@@ -426,21 +400,20 @@
     ::-webkit-scrollbar {
       width: 12px;
     }
-  
+   
     ::-webkit-scrollbar-track {
       background: #0f0f0f;
     }
-  
+   
     ::-webkit-scrollbar-thumb {
       background-color: #ffcc00;
       border-radius: 6px;
       border: 2px solid #0f0f0f;
-      transition: background-color var(--transition-medium), transform var(--transition-fast);
+      transition: background-color 0.3s ease;
     }
-  
+   
     ::-webkit-scrollbar-thumb:hover {
       background-color: #ffd166;
-      transform: scale(1.2);
     }
     mark{
       background:#4b3a00;
@@ -449,126 +422,26 @@
       animation: highlightPulse 1.5s ease infinite;
     }
     @keyframes highlightPulse {
-      0% { background: #4b3a00; transform: scale(1); }
-      50% { background: #5a4700; transform: scale(1.05); }
-      100% { background: #4b3a00; transform: scale(1); }
+      0% { background: #4b3a00; }
+      50% { background: #5a4700; }
+      100% { background: #4b3a00; }
     }
     .hidden{display:none !important}
-
-    .parallax-bg {
-      position: relative;
-      overflow: hidden;
-    }
-    .parallax-bg::before {
-      content: '';
-      position: absolute;
-      top: -50%; left: -50%;
-      width: 200%; height: 200%;
-      background: radial-gradient(circle, rgba(255,204,0,0.05) 0%, transparent 70%);
-      transform: translate(0, 0);
-      transition: transform 0.1s ease-out;
-    }
-
-    [data-tooltip] {
-      position: relative;
-      cursor: help;
-    }
-    [data-tooltip]::after {
-      content: attr(data-tooltip);
-      position: absolute;
-      bottom: 100%; left: 50%;
-      transform: translate(-50%, -10px) scale(0.8);
-      background: var(--bg-softer);
-      color: var(--text);
-      padding: 6px 12px;
-      border-radius: var(--radius-sm);
-      border: 1px solid var(--border);
-      white-space: nowrap;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity var(--transition-medium), transform var(--transition-medium);
-    }
-    [data-tooltip]:hover::after {
-      opacity: 1;
-      transform: translate(-50%, -20px) scale(1);
-    }
-    .btn {
-      display: inline-block;
-      padding: 10px 20px;
-      border-radius: var(--radius);
-      background: linear-gradient(180deg, var(--accent), var(--accent-2));
-      color: #000;
-      font-weight: 600;
-      text-decoration: none;
-      transition: transform var(--transition-medium), box-shadow var(--transition-medium);
-    }
-    .btn:hover {
-      transform: scale(1.05) translateY(-2px);
-      box-shadow: 0 5px 15px rgba(255,204,0,0.4);
-    }
-    .loading {
-      display: inline-block;
-      width: 20px;
-      height: 20px;
-      border: 3px solid var(--accent);
-      border-top-color: transparent;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-    }
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-
-    .back-to-top {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: var(--accent);
-      color: #000;
-      padding: 10px 15px;
-      border-radius: 50%;
-      opacity: 0;
-      transition: opacity var(--transition-medium), transform var(--transition-medium);
-    }
-    .back-to-top.visible {
-      opacity: 1;
-      transform: scale(1.1);
-    }
-    .back-to-top:hover {
-      transform: scale(1.2);
-    }
-    .menu-toggle {
-      display:none;
-      position:fixed;
-      top:20px;
-      left:20px;
-      z-index:100;
-      background:var(--accent);
-      color:#000;
-      border:none;
-      padding:10px 15px;
-      border-radius:50%;
-      font-size:20px;
-      cursor:pointer;
-      transition: transform var(--transition-medium);
-    }
-    .menu-toggle:hover {
-      transform: scale(1.1);
-    }
   </style>
 </head>
 <head>
   <link rel="icon" type="image/png" href="https://i.ibb.co/cjFTy0N/New-Project-33.png">
+
   <meta property="og:title" content="SYNC Addon Docs">
   <meta property="og:description" content="Bedrock Automation Framework Documentation">
   <meta property="og:image" content="https://media.forgecdn.net/attachments/1404/148/new-project-32-_11zon-png.png">
   <meta property="og:url" content="https://leowascoding.github.io/sync/">
   <meta property="og:type" content="website">
+
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="https://media.forgecdn.net/attachments/1404/148/new-project-32-_11zon-png.png">
 </head>
 <body>
-  <button class="menu-toggle" id="menuToggle">☰</button>
   <div class="layout">
     <!-- Sidebar -->
     <aside class="sidebar">
@@ -579,10 +452,12 @@
           <div class="version">Bedrock Automation Framework</div>
         </div>
       </div>
+
       <div class="search">
         <span class="icon">🔎</span>
         <input id="searchInput" type="text" placeholder="Search topics, syntax, examples..." aria-label="Search Sync docs" />
       </div>
+
       <nav class="nav" id="sidebarNav">
         <h3>Foundations</h3>
         <a href="#overview"><span class="dot"></span>Overview</a>
@@ -592,6 +467,7 @@
         <a href="#events"><span class="dot"></span>Events</a>
         <a href="#conditions"><span class="dot"></span>Conditions</a>
         <a href="#inputs"><span class="dot"></span>Inputs</a>
+
         <h3>Actions & Data</h3>
         <a href="#messages"><span class="dot"></span>Messages</a>
         <a href="#commands"><span class="dot"></span>Commands</a>
@@ -599,28 +475,32 @@
         <a href="#placeholders"><span class="dot"></span>Placeholders</a>
         <a href="#globals-locals"><span class="dot"></span>Globals vs Locals</a>
         <a href="#variable-conditions"><span class="dot"></span>Variable conditions</a>
+
         <h3>Flow & Control</h3>
         <a href="#execution-flow"><span class="dot"></span>Execution flow</a>
         <a href="#custom-ui"><span class="dot"></span>Custom UI (Beta)</a>
         <a href="#event-cancellation"><span class="dot"></span>Event cancellation</a>
         <a href="#loops"><span class="dot"></span>Loops</a>
         <a href="#regions"><span class="dot"></span>Protection regions</a>
+
         <h3>Commands</h3>
         <a href="#error-console"><span class="dot"></span>Error console</a>
         <a href="#variable-command"><span class="dot"></span>/variable</a>
         <a href="#varlist-command"><span class="dot"></span>/varlist</a>
         <a href="#broadcast-command"><span class="dot"></span>/broadcast</a>
         <a href="#send-command"><span class="dot"></span>/send</a>
+
         <h3>Guidance</h3>
         <a href="#tips"><span class="dot"></span>Tips, examples & best practices</a>
       </nav>
     </aside>
+
     <!-- Content -->
     <main class="content" id="content">
       <section class="hero">
         <h2>Sync: Create event-driven automations without code</h2>
         <p>Sync is a Minecraft Bedrock addon that lets you build powerful rules: listen to hooks, check conditions, and run actions all through in-game menus and custom UIs. No coding required. Fully developed and maintained by <strong>ExterLeo</strong>.</p>
-        <p><strong>Join Discord:</strong>
+        <p><strong>Join Discord:</strong> 
           <a href="https://discord.gg/dWS69pE3qj">https://discord.gg/dWS69pE3qj</a>
         </p>
         <p><strong>Updated:</strong> <span id="updated"></span></p>
@@ -632,6 +512,7 @@
           <span class="badge">Protection regions</span>
         </div>
       </section>
+
       <div class="grid">
         <div class="card">
           <h3>Quick start</h3>
@@ -651,6 +532,7 @@
           <div class="tip">The website uses modern styling, but in-game texts can use § codes. You can preview colors above.</div>
         </div>
       </div>
+
       <!-- Overview -->
       <article class="section" id="overview" data-title="overview">
         <div class="section-header">
@@ -694,6 +576,7 @@ Actions:
           <div class="tip">Think of Sync like spreadsheet rules: “When X happens and Y is true, do Z.” You don’t need to write code; menus and forms guide you.</div>
         </div>
       </article>
+
       <!-- Folders -->
       <article class="section" id="folders" data-title="folders">
         <div class="section-header">
@@ -734,6 +617,7 @@ Actions:
           </div>
         </div>
       </article>
+
       <!-- Functions -->
       <article class="section" id="functions" data-title="functions">
         <div class="section-header">
@@ -779,6 +663,7 @@ Actions:
           </div>
         </div>
       </article>
+
       <!-- Hooks -->
       <article class="section" id="hooks" data-title="hooks">
         <div class="section-header">
@@ -810,6 +695,7 @@ Actions:
           </div>
         </div>
       </article>
+
       <!-- Events -->
       <article class="section" id="events" data-title="events">
         <div class="section-header">
@@ -837,6 +723,7 @@ Actions:
           </div>
         </div>
       </article>
+
       <!-- Conditions -->
       <article class="section" id="conditions" data-title="conditions">
         <div class="section-header">
@@ -881,6 +768,7 @@ Actions:
           <div class="tip">Combine built-in conditions with variable conditions for precise behavior and protection logic.</div>
         </div>
       </article>
+
       <!-- Inputs -->
       <article class="section" id="inputs" data-title="inputs">
         <div class="section-header">
@@ -902,8 +790,8 @@ Actions:
             </div>
             <div class="sub">
               <h4>Examples</h4>
-              <pre><code>stone,dirt,oak_log # any of these
-diamond_sword + legendary # sword AND display name/lore contains "legendary"
+              <pre><code>stone,dirt,oak_log            # any of these
+diamond_sword + legendary     # sword AND display name/lore contains "legendary"
 excalibur + sharp + epic, wand_of_healing
                               # EITHER sword that contains all three words OR a healing wand
 zombie + boss, minecraft:skeleton
@@ -915,6 +803,7 @@ hello+world, hi there
           </div>
         </div>
       </article>
+
       <!-- Messages -->
       <article class="section" id="messages" data-title="messages">
         <div class="section-header">
@@ -941,6 +830,7 @@ hello+world, hi there
           </div>
         </div>
       </article>
+
       <!-- Commands -->
       <article class="section" id="commands" data-title="commands">
         <div class="section-header">
@@ -966,6 +856,7 @@ hello+world, hi there
           </div>
         </div>
       </article>
+
       <!-- Variables -->
       <article class="section" id="variables" data-title="variables">
         <div class="section-header">
@@ -1001,6 +892,7 @@ Message: "Wheat broken: {wheatbroken}"</code></pre>
           </div>
         </div>
       </article>
+
       <!-- Placeholders -->
       <article class="section" id="placeholders" data-title="placeholders">
         <div class="section-header">
@@ -1031,6 +923,7 @@ Condition: "{item_name} contains &quot;legendary&quot;"</code></pre>
           </div>
         </div>
       </article>
+
       <!-- Globals vs Locals -->
       <article class="section" id="globals-locals" data-title="globals locals">
         <div class="section-header">
@@ -1061,6 +954,7 @@ Condition: "{item_name} contains &quot;legendary&quot;"</code></pre>
           </div>
         </div>
       </article>
+
       <!-- Variable Conditions -->
       <article class="section" id="variable-conditions" data-title="variable conditions">
         <div class="section-header">
@@ -1096,6 +990,7 @@ Cancel if "{vip} != 1" in region "vipzone"</code></pre>
           </div>
         </div>
       </article>
+
       <!-- Execution Flow -->
       <article class="section" id="execution-flow" data-title="execution flow">
         <div class="section-header">
@@ -1118,6 +1013,7 @@ Cancel if "{vip} != 1" in region "vipzone"</code></pre>
           </div>
         </div>
       </article>
+
       <!-- Custom UI -->
       <article class="section" id="custom-ui" data-title="custom ui">
         <div class="section-header">
@@ -1149,6 +1045,7 @@ Custom UI:
           </div>
         </div>
       </article>
+
       <!-- Event Cancellation -->
       <article class="section" id="event-cancellation" data-title="event cancellation">
         <div class="section-header">
@@ -1175,6 +1072,7 @@ Var condition (cancel): "{protected} == 1"</code></pre>
           </div>
         </div>
       </article>
+
       <!-- Loops -->
       <article class="section" id="loops" data-title="loops">
         <div class="section-header">
@@ -1205,6 +1103,7 @@ Var condition (cancel): "{protected} == 1"</code></pre>
                 <pre><code># Global day counter
 Interval: 24000
 Action: add 1 to global 'days'
+
 # Per-player playtime
 Folder: Stats
 Interval: 20
@@ -1215,6 +1114,7 @@ Action: add 1 to local 'playtime'</code></pre>
           </div>
         </div>
       </article>
+
       <!-- Regions -->
       <article class="section" id="regions" data-title="regions">
         <div class="section-header">
@@ -1227,12 +1127,12 @@ Action: add 1 to local 'playtime'</code></pre>
               <h4>What are regions?</h4>
               <p>Simple cuboid protection regions that block placing/breaking inside defined areas using the <strong>region &lt;name&gt;</strong> condition.</p>
               <h4>Commands</h4>
-              <pre><code>/region selection # clears current selection
+              <pre><code>/region selection      # clears current selection
 (Left-click to set Pos1; Right-click to set Pos2)
-Optional: /region expand # expands vertically from -64 to 319
-/region create &lt;name&gt; # saves the region
-/region list # shows all regions
-/region reveal &lt;name&gt; # outline with particles
+Optional: /region expand   # expands vertically from -64 to 319
+/region create &lt;name&gt;   # saves the region
+/region list             # shows all regions
+/region reveal &lt;name&gt;   # outline with particles
 /region delete &lt;name&gt;</code></pre>
             </div>
             <div class="sub">
@@ -1250,6 +1150,7 @@ Var condition (require): "{rank} == admin"</code></pre>
           </div>
         </div>
       </article>
+
       <!-- Error Console -->
       <article class="section" id="error-console" data-title="error console">
         <div class="section-header">
@@ -1269,8 +1170,8 @@ Var condition (require): "{rank} == admin"</code></pre>
             </div>
             <div class="sub">
               <h4>How to open and read</h4>
-              <pre><code>/console # open error console
-/synchelp # help menu (may include link to console)</code></pre>
+              <pre><code>/console     # open error console
+/synchelp    # help menu (may include link to console)</code></pre>
               <ul class="list">
                 <li><strong>Button:</strong> One entry per error.</li>
                 <li><strong>Label:</strong> Shows time and command.</li>
@@ -1281,6 +1182,7 @@ Var condition (require): "{rank} == admin"</code></pre>
           </div>
         </div>
       </article>
+
       <!-- /variable -->
       <article class="section" id="variable-command" data-title="variable command">
         <div class="section-header">
@@ -1314,6 +1216,7 @@ Var condition (require): "{rank} == admin"</code></pre>
           </div>
         </div>
       </article>
+
       <!-- /varlist -->
       <article class="section" id="varlist-command" data-title="varlist command">
         <div class="section-header">
@@ -1345,6 +1248,7 @@ Var condition (require): "{rank} == admin"</code></pre>
           </div>
         </div>
       </article>
+
       <!-- /broadcast -->
       <article class="section" id="broadcast-command" data-title="broadcast command">
         <div class="section-header">
@@ -1372,6 +1276,7 @@ Var condition (require): "{rank} == admin"</code></pre>
           </div>
         </div>
       </article>
+
       <!-- /send -->
       <article class="section" id="send-command" data-title="send command">
         <div class="section-header">
@@ -1399,6 +1304,7 @@ Var condition (require): "{rank} == admin"</code></pre>
           </div>
         </div>
       </article>
+
       <!-- Tips, Examples & Best Practices -->
       <article class="section" id="tips" data-title="tips examples best practices">
         <div class="section-header">
@@ -1420,6 +1326,7 @@ Var condition (require): "{rank} == admin"</code></pre>
               </ul>
             </div>
           </details>
+
           <details class="collapse">
             <summary>Real-world examples</summary>
             <div class="collapse-content">
@@ -1431,7 +1338,7 @@ Var condition (require): "{rank} == admin"</code></pre>
             Action: add local 'wheatbroken' by 1
             Message: "Wheat broken: {wheatbroken}"</code></pre>
               </div>
-           
+            
               <div class="example">
                 <h5>2) VIP Only Zone</h5>
                 <p class="desc">Cancel placement for non-VIPs in region.</p>
@@ -1439,7 +1346,7 @@ Var condition (require): "{rank} == admin"</code></pre>
             Condition: region vipzone
             Var condition (cancel): "{vip} != 1"</code></pre>
               </div>
-           
+            
               <div class="example">
                 <h5>3) Kill Counter + Title</h5>
                 <p class="desc">Track per-player zombie kills.</p>
@@ -1449,7 +1356,7 @@ Var condition (require): "{rank} == admin"</code></pre>
             Action: add local 'zombiekills' by 1
             Command: title {player} actionbar "Zombies killed: {zombiekills}"</code></pre>
               </div>
-           
+            
               <div class="example">
                 <h5>4) Daily Login Reward</h5>
                 <p class="desc">Global loop giving daily rewards.</p>
@@ -1457,7 +1364,7 @@ Var condition (require): "{rank} == admin"</code></pre>
             Command: give @a diamond 1
             Broadcast: "Daily reward claimed!"</code></pre>
               </div>
-           
+            
               <div class="example">
                 <h5>5) Custom Shop</h5>
                 <p class="desc">Interactive purchase using emeralds.</p>
@@ -1469,14 +1376,14 @@ Var condition (require): "{rank} == admin"</code></pre>
                  - command (player): give @s diamond_sword
                  - variable (local): set 'emeralds' to {emeralds} - 10</code></pre>
               </div>
-           
+            
               <div class="example">
                 <h5>6) Anti-Grief Logging</h5>
                 <p class="desc">Log block breaks with coordinates.</p>
                 <pre><code>Hook: Player Break Block (after)
             Message: "§c{player} broke {block_name} at {x} {y} {z}"</code></pre>
               </div>
-           
+            
               <div class="example">
                 <h5>7) Player Level Tracker</h5>
                 <p class="desc">Track XP level ups and reward items.</p>
@@ -1486,7 +1393,7 @@ Var condition (require): "{rank} == admin"</code></pre>
             Command: give {player} golden_apple 1
             Message: "Congrats {player}, you reached level {levels}!"</code></pre>
               </div>
-           
+            
               <div class="example">
                 <h5>8) Region-Based Mining Restriction</h5>
                 <p class="desc">Prevent diamond mining in protected zone.</p>
@@ -1495,7 +1402,7 @@ Var condition (require): "{rank} == admin"</code></pre>
             Condition: region minezone
             Var condition (cancel): "{rank} != admin"</code></pre>
               </div>
-           
+            
               <div class="example">
                 <h5>9) Boss Fight Announcer</h5>
                 <p class="desc">Broadcast when a boss mob dies.</p>
@@ -1503,7 +1410,7 @@ Var condition (require): "{rank} == admin"</code></pre>
             Input: wither
             Broadcast: "§cThe Wither has been defeated by {player}!"</code></pre>
               </div>
-           
+            
               <div class="example">
                 <h5>10) Chat Keyword Trigger</h5>
                 <p class="desc">Run commands when players type keywords.</p>
@@ -1511,7 +1418,7 @@ Var condition (require): "{rank} == admin"</code></pre>
             Input: "help"
             Command: tell {player} "Use /synchelp for guidance."</code></pre>
               </div>
-           
+            
               <div class="example">
                 <h5>11) Playtime Counter</h5>
                 <p class="desc">Track per-player playtime with loops.</p>
@@ -1520,7 +1427,7 @@ Var condition (require): "{rank} == admin"</code></pre>
             Action: add local 'playtime' by 1
             Command (player): "title @s actionbar Playtime: {playtime} seconds"</code></pre>
               </div>
-           
+            
               <div class="example">
                 <h5>12) Hunger-Based Reward</h5>
                 <p class="desc">Give food when hunger drops below threshold.</p>
@@ -1529,7 +1436,7 @@ Var condition (require): "{rank} == admin"</code></pre>
             Command: give {player} bread 1
             Message: "You were hungry, here's some bread!"</code></pre>
               </div>
-           
+            
               <div class="example">
                 <h5>13) PvP Kill Streak</h5>
                 <p class="desc">Reward players after multiple kills.</p>
@@ -1540,7 +1447,7 @@ Var condition (require): "{rank} == admin"</code></pre>
             Command: give {player} diamond_sword 1
             Message: "Kill streak achieved! Reward granted."</code></pre>
               </div>
-           
+            
               <div class="example">
                 <h5>14) Region Entry Message</h5>
                 <p class="desc">Notify players when entering a region.</p>
@@ -1548,7 +1455,7 @@ Var condition (require): "{rank} == admin"</code></pre>
             Condition: region spawn
             Message: "Welcome to the spawn region!"</code></pre>
               </div>
-           
+            
               <div class="example">
                 <h5>15) Seasonal Event Loop</h5>
                 <p class="desc">Give gifts every in-game day.</p>
@@ -1567,6 +1474,7 @@ Var condition (require): "{rank} == admin"</code></pre>
               </div>
             </div>
             </details>
+
           <details class="collapse">
             <summary>Troubleshooting patterns</summary>
             <div class="collapse-content">
@@ -1582,6 +1490,7 @@ Var condition (require): "{rank} == admin"</code></pre>
           </details>
         </div>
       </article>
+
       <div class="footer">
         <div class="credits">
           <span class="credit-badge">Made for Sync Addon</span>
@@ -1592,39 +1501,40 @@ Var condition (require): "{rank} == admin"</code></pre>
       </div>
     </main>
   </div>
+
   <script>
   function timeAgo(date) {
     const diffInSeconds = Math.floor((new Date() - date) / 1000);
- 
+  
     const days = Math.floor(diffInSeconds / (24 * 3600));
     const hours = Math.floor((diffInSeconds % (24 * 3600)) / 3600);
     const minutes = Math.floor((diffInSeconds % 3600) / 60);
     const seconds = diffInSeconds % 60;
- 
+  
     let result = "";
     if (days > 0) result += days + "d ";
     if (hours > 0 || days > 0) result += hours + "h ";
     if (minutes > 0 || hours > 0 || days > 0) result += minutes + "m ";
     result += seconds + "s ago";
- 
+  
     return result;
   }
- 
-  const updatedDate = new Date("2025-11-27T09:03:00-04:00");
- 
+  
+  const updatedDate = new Date("2025-11-27T08:28:00-04:00");
+  
   function refreshTimeAgo() {
     document.getElementById("updated").textContent = timeAgo(updatedDate);
   }
- 
+  
   refreshTimeAgo();
   setInterval(refreshTimeAgo, 1000);
   (function(){
     const input = document.getElementById('searchInput');
     const sections = Array.from(document.querySelectorAll('article.section'));
     const navLinks = Array.from(document.querySelectorAll('.nav a'));
- 
+  
     function normalize(t){ return (t||'').toLowerCase(); }
- 
+  
     function clearHighlights(el){
       const marks = el.querySelectorAll('mark');
       marks.forEach(m => {
@@ -1633,7 +1543,7 @@ Var condition (require): "{rank} == admin"</code></pre>
         m.parentNode.normalize();
       });
     }
- 
+  
     function highlight(el, needle){
       if(!needle) return;
       const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null, false);
@@ -1657,15 +1567,16 @@ Var condition (require): "{rank} == admin"</code></pre>
         node.parentNode.replaceChild(span, node);
       });
     }
- 
+  
     function fuzzyMatch(text, query){
       if(!text || !query) return false;
       return text.includes(query) || (query.length > 2 && text.indexOf(query.slice(0, query.length-1)) > -1);
     }
- 
+  
     function search(){
+      const q = normalize(input.value.trim());
       navLinks.forEach(a => a.classList.remove('hidden'));
- 
+  
       sections.forEach(sec => {
         clearHighlights(sec);
         if(!q){
@@ -1678,14 +1589,14 @@ Var condition (require): "{rank} == admin"</code></pre>
         sec.classList.toggle('hidden', !ok);
         if(ok){ highlight(sec, q); }
       });
- 
+  
       navLinks.forEach(a => {
         const target = document.querySelector(a.getAttribute('href'));
         if(!target) return;
         a.classList.toggle('hidden', target.classList.contains('hidden'));
       });
     }
- 
+  
     function debounce(fn, delay=200){
       let timer;
       return (...args)=>{
@@ -1693,10 +1604,10 @@ Var condition (require): "{rank} == admin"</code></pre>
         timer=setTimeout(()=>fn(...args),delay);
       };
     }
- 
+  
     input.addEventListener('input', debounce(search,200));
   })();
- 
+  
   (function(){
     document.querySelectorAll('.nav a').forEach(a=>{
       a.addEventListener('click', e=>{
@@ -1707,19 +1618,7 @@ Var condition (require): "{rank} == admin"</code></pre>
           window.scrollTo({ top: target.offsetTop - 10, behavior: 'smooth' });
           history.replaceState(null, '', id);
         }
-        if(window.innerWidth <= 980){
-          sidebar.style.display = 'none';
-          toggle.textContent = '☰';
-        }
       });
-    });
-  })();
-  (function(){
-    const toggle = document.getElementById('menuToggle');
-    const sidebar = document.querySelector('.sidebar');
-    toggle.addEventListener('click', () => {
-      sidebar.style.display = sidebar.style.display === 'block' ? 'none' : 'block';
-      toggle.textContent = sidebar.style.display === 'block' ? '✕' : '☰';
     });
   })();
   </script>

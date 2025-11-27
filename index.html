@@ -257,6 +257,10 @@
       height:1px; background:linear-gradient(90deg, transparent, #224, transparent);
       margin:16px 0;
     }
+    #updated {
+      color: #555;
+      font-weight: normal;
+    }
 
     /* Search highlighting */
     mark{
@@ -341,6 +345,7 @@
         <p><strong>Join Discord:</strong> 
           <a href="https://discord.gg/dWS69pE3qj">https://discord.gg/dWS69pE3qj</a>
         </p>
+        <p><strong>Updated:</strong> <span id="updated"></span></p>
         <div style="margin-top:12px">
           <span class="badge">Beginner friendly</span>
           <span class="badge">Event-driven</span>
@@ -1340,6 +1345,25 @@ Var condition (require): "{rank} == admin"</code></pre>
   </div>
 
   <script>
+  function timeAgo(date) {
+    const seconds = Math.floor((new Date() - date) / 1000);
+    if (seconds < 60) return seconds + "s ago";
+    const minutes = Math.floor(seconds / 60);
+    if (minutes < 60) return minutes + "m ago";
+    const hours = Math.floor(minutes / 60);
+    if (hours < 24) return hours + "h ago";
+    const days = Math.floor(hours / 24);
+    return days + "d ago";
+  }
+  
+  const updatedDate = new Date("2025-11-27T00:00:00");
+  
+  function refreshTimeAgo() {
+    document.getElementById("updated").textContent = timeAgo(updatedDate);
+  }
+  
+  refreshTimeAgo();
+  setInterval(refreshTimeAgo, 1000);
   (function(){
     const input = document.getElementById('searchInput');
     const sections = Array.from(document.querySelectorAll('article.section'));

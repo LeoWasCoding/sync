@@ -7,23 +7,23 @@
   <meta name="description" content="Sync is a Minecraft Bedrock add-on that lets you create custom event-driven automations without code. This site documents everything: folders, functions, hooks, conditions, variables, loops, custom UI, regions, and more." />
   <style>
     :root{
-      --bg:#0f1115;
-      --bg-soft:#141821;
-      --bg-softer:#1a2030;
-      --text:#e8eef8;
-      --muted:#a8b0c0;
-      --accent:#66c0ff;
-      --accent-2:#7bf3c6;
-      --accent-3:#ffd166;
+      --bg:#0f0f0f;
+      --bg-soft:#141414;
+      --bg-softer:#1a1a1a;
+      --text:#f5f5f5;
+      --muted:#b0b0b0;
+      --accent:#ffcc00;       /* primary gold */
+      --accent-2:#ffb700;     /* deeper amber */
+      --accent-3:#ffd166;     /* lighter yellow */
       --danger:#ff6b6b;
       --good:#3ddc97;
       --warn:#f4a261;
-      --border:#223046;
-      --code-bg:#0b0e14;
-      --link:#82d0ff;
-      --link-hover:#a9ddff;
+      --border:#2a2a2a;
+      --code-bg:#0b0b0b;
+      --link:#ffcc00;
+      --link-hover:#ffe066;
       --sidebar-width:300px;
-      --shadow:0 10px 30px rgba(0,0,0,0.3);
+      --shadow:0 10px 30px rgba(0,0,0,0.4);
       --radius:14px;
       --radius-sm:10px;
     }
@@ -34,9 +34,9 @@
       font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,"Fira Sans","Droid Sans","Helvetica Neue",Arial,"Noto Sans",sans-serif;
       color:var(--text);
       background:
-        radial-gradient(1200px 600px at 15% -10%, rgba(123,243,198,0.08), transparent 60%),
-        radial-gradient(1000px 500px at 85% 110%, rgba(102,192,255,0.10), transparent 70%),
-        linear-gradient(180deg, #0b0d12, #10131a);
+        radial-gradient(1200px 600px at 15% -10%, rgba(255,204,0,0.08), transparent 60%),
+        radial-gradient(1000px 500px at 85% 110%, rgba(255,183,0,0.10), transparent 70%),
+        linear-gradient(180deg, #0b0b0b, #121212);
       overflow-y:auto;
     }
     a{color:var(--link);text-decoration:none}
@@ -49,7 +49,7 @@
     .sidebar{
       position:sticky; top:0; align-self:start;
       height:100vh; overflow:auto;
-      background:linear-gradient(180deg, #121620 0%, #0e121a 100%);
+      background:linear-gradient(180deg, #1a1a1a 0%, #0e0e0e 100%);
       border-right:1px solid var(--border);
       padding:20px 18px;
     }
@@ -66,7 +66,7 @@
     .brand h1{
       font-size:18px; margin:0;
       letter-spacing:0.4px;
-      background:linear-gradient(90deg, #7bf3c6, #66c0ff 60%, #ffd166);
+      background:linear-gradient(90deg, #ffcc00, #ffb700 60%, #ffd166);
       -webkit-background-clip:text; background-clip:text; color:transparent;
       font-weight:800;
     }
@@ -98,7 +98,7 @@
     .nav a:hover{background:var(--bg-soft); border-color:var(--border)}
     .nav .dot{
       width:8px; height:8px; border-radius:50%;
-      background:linear-gradient(180deg, #66c0ff, #7bf3c6);
+      background:linear-gradient(180deg, #ffcc00, #ffb700);
       box-shadow:0 0 0 2px #0006;
     }
     .content{
@@ -106,9 +106,9 @@
     }
     .hero{
       background:
-        radial-gradient(800px 400px at 10% 0%, rgba(102,192,255,0.16), transparent 70%),
-        radial-gradient(900px 400px at 100% 120%, rgba(123,243,198,0.12), transparent 65%),
-        linear-gradient(180deg, #10131a, #121722);
+        radial-gradient(800px 400px at 10% 0%, rgba(255,204,0,0.16), transparent 70%),
+        radial-gradient(900px 400px at 100% 120%, rgba(255,183,0,0.12), transparent 65%),
+        linear-gradient(180deg, #121212, #1a1a1a);
       border:1px solid var(--border);
       border-radius:var(--radius);
       box-shadow:var(--shadow);
@@ -118,7 +118,7 @@
     .hero p{color:var(--muted); margin:0}
     .badge{
       display:inline-block; padding:6px 10px; border-radius:999px; font-size:12px; margin:4px 8px 0 0;
-      border:1px solid var(--border); color:#cde7ff; background:linear-gradient(180deg, #131926, #101520);
+      border:1px solid var(--border); color:#ffe066; background:linear-gradient(180deg, #1a1a1a, #101010);
     }
     .grid{
       display:grid; gap:18px; margin-top:22px;
@@ -153,7 +153,7 @@
     }
     .section-header h2{
       margin:0; font-size:20px;
-      background:linear-gradient(90deg, #d9eeff, #bfefff);
+      background:linear-gradient(90deg, #ffe066, #ffcc00);
       -webkit-background-clip:text; background-clip:text; color:transparent;
     }
     .section-tools{display:flex; gap:10px}
@@ -165,16 +165,16 @@
       border:1px dashed var(--border);
       border-radius:var(--radius-sm);
       padding:14px;
-      background:linear-gradient(180deg, #121725, #121420);
+      background:linear-gradient(180deg, #1a1a1a, #121212);
     }
     .sub h4{margin:0 0 6px; font-size:16px}
     .list{margin:10px 0 0; padding-left:18px}
     .list li{margin:6px 0}
     .tip{
       border-left:4px solid var(--accent);
-      background:linear-gradient(180deg, #101520, #0e141e);
+      background:linear-gradient(180deg, #101010, #0e0e0e);
       margin:16px 0; padding:10px 14px; border-radius:10px;
-      color:#cfe8ff;
+      color:#ffe066;
     }
     .warn{
       border-left:4px solid var(--warn);
@@ -194,30 +194,30 @@
     pre{
       margin:12px 0; padding:14px 16px; border-radius:12px;
       background:var(--code-bg);
-      border:1px solid #152032;
+      border:1px solid #222;
       overflow:auto;
-      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.03);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.05);
     }
-    code{color:#bfe1ff}
+    code{color:#ffe066}
 
     .example{
       border:1px solid var(--border);
       border-radius:12px; padding:14px;
-      background:linear-gradient(180deg, #121420, #10131b);
+      background:linear-gradient(180deg, #1a1a1a, #121212);
       margin:14px 0;
     }
-    .example h5{margin:0 0 8px; font-size:14px; color:#a8c3ff}
+    .example h5{margin:0 0 8px; font-size:14px; color:#ffcc00}
     .example .desc{color:var(--muted); margin-bottom:8px}
 
     /* Collapsible blocks */
     .collapse{
       border:1px solid var(--border);
       border-radius:12px; overflow:hidden; margin:12px 0;
-      background:linear-gradient(180deg, #0f131c, #111620);
+      background:linear-gradient(180deg, #0f0f0f, #1a1a1a);
     }
     .collapse summary{
       list-style:none; cursor:pointer; padding:12px 12px;
-      font-weight:600; color:#d9eeff;
+      font-weight:600; color:#ffd166;
     }
     .collapse summary::-webkit-details-marker{display:none}
     .collapse-content{
@@ -234,38 +234,38 @@
     }
     .credits .credit-badge{
       padding:6px 10px; border-radius:999px; border:1px solid var(--border);
-      background:linear-gradient(180deg, #121620, #0e121a); color:#cfe8ff; font-size:12px;
+      background:linear-gradient(180deg, #1a1a1a, #0e0e0e); color:#ffd166; font-size:12px;
     }
 
     /* Minecraft-style inline color codes preview */
     .mc-line{
       display:inline-block; padding:8px 10px; border:1px solid var(--border);
-      border-radius:10px; background:linear-gradient(180deg, #0f131a, #10131b);
+      border-radius:10px; background:linear-gradient(180deg, #0f0f0f, #1a1a1a);
       font-weight:700; letter-spacing:0.3px;
     }
-    .mc-b{color:#66c0ff}
+    .mc-b{color:#ffcc00}
     .mc-e{color:#ffd166}
-    .mc-a{color:#7bf3c6}
+    .mc-a{color:#ffb700}
     .mc-c{color:#ff6b6b}
-    .mc-3{color:#4db2ff}
+    .mc-3{color:#ffcc33}
     .mc-4{color:#ff5b5b}
-    .mc-8{color:#8892a0}
+    .mc-8{color:#888}
     .mc-d{color:#c58cff}
     .mc-6{color:#ffcd75}
     .mc-l{font-weight:900}
     .divider{
-      height:1px; background:linear-gradient(90deg, transparent, #224, transparent);
+      height:1px; background:linear-gradient(90deg, transparent, #444, transparent);
       margin:16px 0;
     }
     #updated {
-      color: #ffffe0;
+      color: #ffe066;
       font-weight: normal;
     }
 
     /* Search highlighting */
     mark{
-      background:#294b78;
-      color:#e9f4ff;
+      background:#4b3a00;
+      color:#fff8dc;
       padding:0 2px; border-radius:3px;
     }
     .hidden{display:none !important}

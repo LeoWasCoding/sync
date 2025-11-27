@@ -1356,7 +1356,7 @@ Var condition (require): "{rank} == admin"</code></pre>
     return days + "d ago";
   }
   
-  const updatedDate = new Date("{{BUILD_DATE}}");
+  const updatedDate = new Date("{{ .Site.LastChange }}");
   
   function refreshTimeAgo() {
     document.getElementById("updated").textContent = timeAgo(updatedDate);

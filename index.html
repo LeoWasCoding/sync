@@ -1805,10 +1805,8 @@ Var condition (require): "{rank} == admin"</code></pre>
     </main>
   </div>
 <script>
-    // --- Utility: Time Ago / Countdown ---
     function timeAgo(date) {
       const now = new Date();
-      // Use absolute difference to handle both past and future dates
       const diffInSeconds = Math.floor(Math.abs(now - date) / 1000);
 
       const days = Math.floor(diffInSeconds / (24 * 3600));
@@ -1835,15 +1833,12 @@ Var condition (require): "{rank} == admin"</code></pre>
     refreshTimeAgo();
     setInterval(refreshTimeAgo, 1000);
 
-    // --- Core: Search Engine ---
     (function() {
       const input = document.getElementById('searchInput');
-      // Cache DOM elements to avoid querying them repeatedly
       const sections = Array.from(document.querySelectorAll('article.section'));
       const navLinks = Array.from(document.querySelectorAll('.nav a'));
       const noResultsMsg = document.getElementById('no-results') || createNoResultsDiv();
 
-      // Create a search index for performance (Store text content in memory)
       const searchIndex = sections.map(sec => ({
         element: sec,
         title: (sec.querySelector('.section-header h2')?.textContent || '').toLowerCase(),
@@ -1858,57 +1853,47 @@ Var condition (require): "{rank} == admin"</code></pre>
         div.style.padding = '20px';
         div.style.textAlign = 'center';
         div.style.color = '#888';
-        // Append after the input or sections container
         if(sections.length > 0) sections[sections.length-1].parentNode.appendChild(div);
         return div;
       }
 
       function clearHighlights(root) {
-        // Efficiently remove <mark> tags while keeping text
         const marks = Array.from(root.querySelectorAll('mark'));
         marks.forEach(mark => {
           const parent = mark.parentNode;
           parent.replaceChild(document.createTextNode(mark.textContent), mark);
-          parent.normalize(); // Merges adjacent text nodes
+          parent.normalize();
         });
       }
 
       function highlight(root, terms) {
         if (!terms || terms.length === 0) return;
-        
-        // Create a Regex that matches any of the terms (Case Insensitive)
-        // Escape special regex characters in terms first
         const safeTerms = terms.map(t => t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
         const regex = new RegExp(`(${safeTerms.join('|')})`, 'gi');
 
         const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null, false);
         const textNodes = [];
         
-        // Snapshot text nodes first so we don't mess up the iterator while modifying
         while (walker.nextNode()) textNodes.push(walker.currentNode);
 
         textNodes.forEach(node => {
-          // Skip if parent is already a mark or script/style
           if (node.parentNode.nodeName === 'MARK' || 
               node.parentNode.nodeName === 'SCRIPT' || 
               node.parentNode.nodeName === 'STYLE') return;
 
           const text = node.nodeValue;
-          if (!regex.test(text)) return; // No match in this node
+          if (!regex.test(text)) return;
 
-          regex.lastIndex = 0; // Reset regex
+          regex.lastIndex = 0;
           
           const fragment = document.createDocumentFragment();
           let lastIdx = 0;
           let match;
 
-          // Loop through matches within this single text node
           while ((match = regex.exec(text)) !== null) {
-            // Append text before the match
             if (match.index > lastIdx) {
               fragment.appendChild(document.createTextNode(text.slice(lastIdx, match.index)));
             }
-            // Append the marked match
             const mark = document.createElement('mark');
             mark.textContent = match[0];
             fragment.appendChild(mark);
@@ -1916,7 +1901,6 @@ Var condition (require): "{rank} == admin"</code></pre>
             lastIdx = regex.lastIndex;
           }
 
-          // Append remaining text
           if (lastIdx < text.length) {
             fragment.appendChild(document.createTextNode(text.slice(lastIdx)));
           }
@@ -1928,11 +1912,9 @@ Var condition (require): "{rank} == admin"</code></pre>
       function performSearch() {
         const query = input.value.trim().toLowerCase();
         
-        // Split query into terms (e.g. "data base" -> ["data", "base"])
         const terms = query.split(/\s+/).filter(t => t.length > 0);
         let visibleCount = 0;
 
-        // 1. Reset Visibility & Highlights
         sections.forEach(sec => clearHighlights(sec));
         navLinks.forEach(a => a.classList.remove('hidden'));
         noResultsMsg.classList.add('hidden');
@@ -1942,10 +1924,7 @@ Var condition (require): "{rank} == admin"</code></pre>
           return;
         }
 
-        // 2. Filter Sections
         searchIndex.forEach(item => {
-          // Check if ALL terms are present (AND logic)
-          // Change .every() to .some() if you want OR logic
           const isMatch = terms.every(term => 
             item.title.includes(term) || item.body.includes(term)
           );
@@ -1958,17 +1937,14 @@ Var condition (require): "{rank} == admin"</code></pre>
           }
         });
 
-        // 3. Filter Navigation
         navLinks.forEach(a => {
           const id = a.getAttribute('href');
           const target = document.querySelector(id);
-          // If target section is hidden, hide the link too
           if (target && target.classList.contains('hidden')) {
             a.classList.add('hidden');
           }
         });
 
-        // 4. Show "No Results" if needed
         if (visibleCount === 0) {
           noResultsMsg.classList.remove('hidden');
         }
@@ -1985,7 +1961,6 @@ Var condition (require): "{rank} == admin"</code></pre>
       input.addEventListener('input', debounce(performSearch, 300));
     })();
 
-    // --- Navigation: Smooth Scroll ---
     (function() {
       document.querySelectorAll('.nav a').forEach(a => {
         a.addEventListener('click', e => {
@@ -1993,11 +1968,9 @@ Var condition (require): "{rank} == admin"</code></pre>
           const target = document.querySelector(id);
           if (target) {
             e.preventDefault();
-            // Fallback for browsers without smooth scroll behavior in CSS
             const offset = target.offsetTop - 10;
             window.scrollTo({ top: offset, behavior: 'smooth' });
             
-            // Update URL without jump
             history.pushState(null, '', id);
           }
         });
